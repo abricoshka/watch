@@ -4,20 +4,63 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
+import androidx.compose.foundation.background
 import androidx.compose.foundation.isSystemInDarkTheme
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.runtime.*
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import cafe.adriel.voyager.navigator.Navigator
-import com.magical.watch.screens.MyWatchScreen
+import cafe.adriel.voyager.transitions.FadeTransition
+import com.kyant.backdrop.backdrops.rememberCanvasBackdrop
+import com.magical.watch.screens.*
+import com.magical.watch.ui.compass
+import com.magical.watch.ui.watch
+import com.magical.watch.ui.watchface
 import io.github.alexzhirkevich.cupertino.theme.CupertinoTheme
+import com.magical.watch.screens.FaceGalleryTab
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
+
         setContent {
             CupertinoTheme {
                 isSystemInDarkTheme()
 
-                Navigator(MyWatchScreen())
+                val backdrop = rememberCanvasBackdrop { drawRect(Color.Black) }
+
+                val tabs = remember {
+                    listOf(
+                        TabInfo("My Watch", watch, MyWatchTab()),
+                        TabInfo("Face Gallery", watchface, FaceGalleryTab()),
+                        TabInfo("Discover", compass, DiscoverTab())
+                    )
+                }
+
+                var selectedIndex by remember { mutableIntStateOf(0) }
+
+                Box(Modifier.fillMaxSize().background(Color.Black)) {
+                    Navigator(tabs[selectedIndex].screen) { navigator ->
+                        FadeTransition(navigator)
+
+                        BottomTabs(
+                            backdrop = backdrop,
+                            tabs = tabs,
+                            currentTabIndex = selectedIndex,
+                            onTabSelected = { newIndex ->
+                                if (newIndex == selectedIndex) return@BottomTabs
+                                navigator.replace(tabs[newIndex].screen)
+                                selectedIndex = newIndex
+                            },
+                            modifier = Modifier.align(Alignment.BottomCenter)
+                        )
+                    }
+                }
+
             }
         }
     }

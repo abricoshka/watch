@@ -87,4 +87,6 @@ dependencies {
     implementation("cafe.adriel.voyager:voyager-livedata:${voyagerVersion}")
     // Transitions
     implementation("cafe.adriel.voyager:voyager-transitions:${voyagerVersion}")
+    // TabNavigator
+    implementation("cafe.adriel.voyager:voyager-tab-navigator:${voyagerVersion}")
 }
