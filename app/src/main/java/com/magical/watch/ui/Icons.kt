@@ -283,4 +283,78 @@ val compass: ImageVector
 
 private var _compass: ImageVector? = null
 
+// "My Watch" Screen Info icon
+val info: ImageVector
+get() {
+    if (_info != null) return _info!!
+
+    _info = ImageVector.Builder(
+    name = "info",
+    defaultWidth = 22.dp,
+    defaultHeight = 22.dp,
+    viewportWidth = 22f,
+    viewportHeight = 22f
+    ).apply {
+        path(
+            fill = SolidColor(Color(0xFFFF8B00))
+        ) {
+            moveTo(10.6948f, 21.3896f)
+            curveTo(9.21826f, 21.3896f, 7.83398f, 21.1094f, 6.54199f, 20.5488f)
+            curveTo(5.25f, 19.9951f, 4.11182f, 19.2261f, 3.12744f, 18.2417f)
+            curveTo(2.1499f, 17.2642f, 1.38428f, 16.1328f, 0.830566f, 14.8477f)
+            curveTo(0.276855f, 13.5557f, 0f, 12.1714f, 0f, 10.6948f)
+            curveTo(0f, 9.21826f, 0.276855f, 7.83398f, 0.830566f, 6.54199f)
+            curveTo(1.38428f, 5.25f, 2.1499f, 4.11523f, 3.12744f, 3.1377f)
+            curveTo(4.11182f, 2.15332f, 5.25f, 1.38428f, 6.54199f, 0.830566f)
+            curveTo(7.83398f, 0.276855f, 9.21826f, 0f, 10.6948f, 0f)
+            curveTo(12.1714f, 0f, 13.5557f, 0.276855f, 14.8477f, 0.830566f)
+            curveTo(16.1396f, 1.38428f, 17.2744f, 2.15332f, 18.252f, 3.1377f)
+            curveTo(19.2295f, 4.11523f, 19.9951f, 5.25f, 20.5488f, 6.54199f)
+            curveTo(21.1094f, 7.83398f, 21.3896f, 9.21826f, 21.3896f, 10.6948f)
+            curveTo(21.3896f, 12.1714f, 21.1094f, 13.5557f, 20.5488f, 14.8477f)
+            curveTo(19.9951f, 16.1328f, 19.2295f, 17.2642f, 18.252f, 18.2417f)
+            curveTo(17.2744f, 19.2261f, 16.1396f, 19.9951f, 14.8477f, 20.5488f)
+            curveTo(13.5557f, 21.1094f, 12.1714f, 21.3896f, 10.6948f, 21.3896f)
+            close()
+            moveTo(8.7876f, 16.5703f)
+            horizontalLineTo(13.1147f)
+            curveTo(13.3745f, 16.5703f, 13.5933f, 16.4883f, 13.771f, 16.3242f)
+            curveTo(13.9487f, 16.1533f, 14.0376f, 15.9346f, 14.0376f, 15.668f)
+            curveTo(14.0376f, 15.4287f, 13.9487f, 15.2236f, 13.771f, 15.0527f)
+            curveTo(13.5933f, 14.875f, 13.3745f, 14.7861f, 13.1147f, 14.7861f)
+            horizontalLineTo(12.0278f)
+            verticalLineTo(10.0078f)
+            curveTo(12.0278f, 9.65918f, 11.9424f, 9.38232f, 11.7715f, 9.17725f)
+            curveTo(11.6074f, 8.96533f, 11.3613f, 8.85938f, 11.0332f, 8.85938f)
+            horizontalLineTo(8.98242f)
+            curveTo(8.72266f, 8.85938f, 8.50391f, 8.94482f, 8.32617f, 9.11572f)
+            curveTo(8.14844f, 9.28662f, 8.05957f, 9.49512f, 8.05957f, 9.74121f)
+            curveTo(8.05957f, 10.0078f, 8.14844f, 10.2231f, 8.32617f, 10.3872f)
+            curveTo(8.50391f, 10.5513f, 8.72266f, 10.6333f, 8.98242f, 10.6333f)
+            horizontalLineTo(10.0181f)
+            verticalLineTo(14.7861f)
+            horizontalLineTo(8.7876f)
+            curveTo(8.52783f, 14.7861f, 8.30908f, 14.875f, 8.13135f, 15.0527f)
+            curveTo(7.95361f, 15.2236f, 7.86475f, 15.4287f, 7.86475f, 15.668f)
+            curveTo(7.86475f, 15.9346f, 7.95361f, 16.1533f, 8.13135f, 16.3242f)
+            curveTo(8.30908f, 16.4883f, 8.52783f, 16.5703f, 8.7876f, 16.5703f)
+            close()
+            moveTo(10.6436f, 7.28027f)
+            curveTo(11.0674f, 7.28027f, 11.4263f, 7.1333f, 11.7202f, 6.83936f)
+            curveTo(12.0142f, 6.53857f, 12.1611f, 6.17969f, 12.1611f, 5.7627f)
+            curveTo(12.1611f, 5.33203f, 12.0142f, 4.96973f, 11.7202f, 4.67578f)
+            curveTo(11.4263f, 4.375f, 11.0674f, 4.22461f, 10.6436f, 4.22461f)
+            curveTo(10.2266f, 4.22461f, 9.86768f, 4.375f, 9.56689f, 4.67578f)
+            curveTo(9.27295f, 4.96973f, 9.12598f, 5.33203f, 9.12598f, 5.7627f)
+            curveTo(9.12598f, 6.17969f, 9.27295f, 6.53857f, 9.56689f, 6.83936f)
+            curveTo(9.86768f, 7.1333f, 10.2266f, 7.28027f, 10.6436f, 7.28027f)
+            close()
+        }
+    }.build()
+
+    return _info!!
+}
+
+private var _info: ImageVector? = null
+
 
