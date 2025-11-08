@@ -43,8 +43,8 @@ import com.kyant.backdrop.backdrops.rememberCombinedBackdrop
 import com.kyant.backdrop.backdrops.rememberLayerBackdrop
 import com.kyant.backdrop.drawBackdrop
 import com.kyant.backdrop.effects.blur
+import com.kyant.backdrop.effects.colorControls
 import com.kyant.backdrop.effects.lens
-import com.kyant.backdrop.effects.vibrancy
 import com.kyant.backdrop.highlight.Highlight
 import com.kyant.backdrop.shadow.InnerShadow
 import com.kyant.backdrop.shadow.Shadow
@@ -66,11 +66,8 @@ fun LiquidBottomTabs(
     modifier: Modifier = Modifier,
     content: @Composable RowScope.() -> Unit
 ) {
-    val isLightTheme = !isSystemInDarkTheme()
     val accentColor = Color(0xFFFFA429)
-    val containerColor =
-        if (isLightTheme) Color(0xFFFAFAFA).copy(0.4f)
-        else Color(0xFF353535).copy(0.4f)
+    val containerColor = Color(0xFF353535).copy(0.4f)
 
     val tabsBackdrop = rememberLayerBackdrop()
 
@@ -173,6 +170,7 @@ fun LiquidBottomTabs(
             )
         }
 
+        // background lower layer
         Row(
             Modifier
                 .graphicsLayer {
@@ -182,8 +180,7 @@ fun LiquidBottomTabs(
                     backdrop = backdrop,
                     shape = { ContinuousCapsule },
                     effects = {
-                        vibrancy()
-                        blur(8f.dp.toPx())
+                        blur(2f.dp.toPx())
                         lens(24f.dp.toPx(), 24f.dp.toPx())
                     },
                     layerBlock = {
@@ -191,6 +188,9 @@ fun LiquidBottomTabs(
                         val scale = lerp(1f, 1f + 16f.dp.toPx() / size.width, progress)
                         scaleX = scale
                         scaleY = scale
+                    },
+                    highlight = {
+                        Highlight.Default.copy(alpha = 0.4f)
                     },
                     onDrawSurface = { drawRect(containerColor) }
                 )
@@ -202,6 +202,7 @@ fun LiquidBottomTabs(
             content = content
         )
 
+        // background upper layer
         CompositionLocalProvider(
             LocalLiquidBottomTabScale provides {
                 lerp(1f, 1.2f, dampedDragAnimation.pressProgress)
@@ -220,8 +221,7 @@ fun LiquidBottomTabs(
                         shape = { ContinuousCapsule },
                         effects = {
                             val progress = dampedDragAnimation.pressProgress
-                            vibrancy()
-                            blur(8f.dp.toPx())
+                            blur(2f.dp.toPx())
                             lens(
                                 24f.dp.toPx() * progress,
                                 24f.dp.toPx() * progress
@@ -243,6 +243,7 @@ fun LiquidBottomTabs(
             )
         }
 
+        // tab capsule
         Box(
             Modifier
                 .padding(horizontal = 4f.dp)
@@ -266,7 +267,7 @@ fun LiquidBottomTabs(
                     },
                     highlight = {
                         val progress = dampedDragAnimation.pressProgress
-                        Highlight.Default.copy(alpha = (progress / 2f))
+                        Highlight.Default.copy(alpha = progress)
                     },
                     shadow = {
                         val progress = dampedDragAnimation.pressProgress
@@ -289,8 +290,7 @@ fun LiquidBottomTabs(
                     onDrawSurface = {
                         val progress = dampedDragAnimation.pressProgress
                         drawRect(
-                            if (isLightTheme) Color.Black.copy(0.1f)
-                            else Color.White.copy(0.1f),
+                            Color.White.copy(0.1f),
                             alpha = 1f - progress
                         )
                         drawRect(Color.Black.copy(alpha = 0.03f * progress))

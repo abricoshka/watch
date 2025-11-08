@@ -63,13 +63,13 @@ half4 main(float2 coord) {
             if (progress > 0f) {
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU && shader != null) {
                     drawRect(
-                        Color.White.copy(0.08f * progress),
+                        Color.White.copy(0.06f * progress),
                         blendMode = BlendMode.Plus
                     )
                     shader.apply {
                         val position = position(size, positionAnimation.value)
                         setFloatUniform("size", size.width, size.height)
-                        setColorUniform("color", Color.White.copy(0.15f * progress).toArgb())
+                        setColorUniform("color", Color.White.copy(0.1f * progress).toArgb())
                         setFloatUniform("radius", size.minDimension * 1.5f)
                         setFloatUniform(
                             "position",
@@ -83,7 +83,7 @@ half4 main(float2 coord) {
                     )
                 } else {
                     drawRect(
-                        Color.White.copy(0.25f * progress),
+                        Color.White.copy(0.15f * progress),
                         blendMode = BlendMode.Plus
                     )
                 }

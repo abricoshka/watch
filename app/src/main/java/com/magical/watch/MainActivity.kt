@@ -14,7 +14,9 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import cafe.adriel.voyager.navigator.Navigator
 import cafe.adriel.voyager.transitions.FadeTransition
+import com.kyant.backdrop.backdrops.layerBackdrop
 import com.kyant.backdrop.backdrops.rememberCanvasBackdrop
+import com.kyant.backdrop.backdrops.rememberLayerBackdrop
 import com.magical.watch.screens.*
 import com.magical.watch.ui.compass
 import com.magical.watch.ui.watch
@@ -31,24 +33,35 @@ class MainActivity : ComponentActivity() {
             CupertinoTheme {
                 isSystemInDarkTheme()
 
-                val backdrop = rememberCanvasBackdrop { drawRect(Color.Black) }
+                var selectedIndex by remember { mutableIntStateOf(0) }
+
+                val simplifiedBackdrop = rememberCanvasBackdrop { drawRect(Color.Black) }
+                val backdrop = rememberLayerBackdrop {
+                    drawRect(Color.Black) // background
+                    drawContent()
+                }
+
 
                 val tabs = remember {
                     listOf(
                         TabInfo("My Watch", watch, MyWatchTab()),
-                        TabInfo("Face Gallery", watchface, FaceGalleryTab()),
+                        TabInfo("Face Gallery", watchface, FaceGalleryTab(backdrop)),
                         TabInfo("Discover", compass, DiscoverTab())
                     )
                 }
 
-                var selectedIndex by remember { mutableIntStateOf(0) }
 
-                Box(Modifier.fillMaxSize().background(Color.Black)) {
+                Box(
+                    Modifier
+                        .fillMaxSize()
+                        .background(Color.Black)
+                ) {
                     Navigator(tabs[selectedIndex].screen) { navigator ->
                         FadeTransition(navigator)
 
+
                         BottomTabs(
-                            backdrop = backdrop,
+                            backdrop = if (selectedIndex == 1) backdrop else simplifiedBackdrop,
                             tabs = tabs,
                             currentTabIndex = selectedIndex,
                             onTabSelected = { newIndex ->
