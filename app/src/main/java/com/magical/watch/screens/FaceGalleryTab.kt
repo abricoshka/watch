@@ -13,6 +13,7 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.layout.ContentScale
@@ -83,22 +84,22 @@ class FaceGalleryTab(
             title: String,
             subtitle: String,
             modifier: Modifier = Modifier,
-            image: Painter = painterResource(R.drawable.watches)
+            image: Painter = painterResource(R.drawable.set_up_apple_watch_normal),
+            shape: Shape = RoundedCornerShape(20.dp),
         ) {
             Box(
-                modifier = modifier
-                    .clip(RoundedCornerShape(20.dp))
+                modifier = Modifier
+                    .clip(shape)
                     .background(Color(0xFF1C1C1D))
-                    .padding(horizontal = 21.dp, vertical = 18.dp)
+                    .then(modifier)
+                    .padding(vertical = 21.dp, horizontal = 18.dp)
             ) {
                 Image(
                     painter = image,
                     contentDescription = null,
                     modifier = Modifier
                         .align(Alignment.Center)
-                        .fillMaxWidth(0.8f)
-                        .aspectRatio(1f)
-                        .fillMaxWidth()
+                        .height(125.dp)
                         .clip(RoundedCornerShape(14.dp)),
                     contentScale = ContentScale.Crop
                 )
@@ -155,7 +156,16 @@ class FaceGalleryTab(
                             WatchFaceCard(
                                 title = "New Watch Faces",
                                 subtitle = "The latest Apple Watch faces.",
-                                modifier = Modifier.fillMaxWidth().height(258.dp)
+                                modifier = Modifier
+                                    .fillMaxWidth()
+                                    .height(258.dp)
+                                    .background(brush = Brush.verticalGradient(
+                                        0f to Color(0xff5b78ff),
+                                        0.39f to Color(0xff313d7b),
+                                        0.73f to Color(0xff1c1d25),
+                                        1f to Color(0xff1c1c1d)
+                                    ), shape = RoundedCornerShape(20.dp)),
+                                image = painterResource(R.drawable.newfaces_preview)
                             )
 
                             Row(
@@ -165,12 +175,15 @@ class FaceGalleryTab(
                                 WatchFaceCard(
                                     title = "Health and Fitness",
                                     subtitle = "Focus on your activity and wellbeing.",
-                                    modifier = Modifier.weight(1f).fillMaxHeight()
+                                    modifier = Modifier.weight(1f).fillMaxHeight(),
+                                    image = painterResource(R.drawable.health_fitness_preview)
+
                                 )
                                 WatchFaceCard(
                                     title = "Photos",
                                     subtitle = "Your favorite images on your wrist.",
-                                    modifier = Modifier.weight(1f).fillMaxHeight()
+                                    modifier = Modifier.weight(1f).fillMaxHeight(),
+                                    image = painterResource(R.drawable.photos_preview)
                                 )
                             }
 
@@ -180,13 +193,15 @@ class FaceGalleryTab(
                             ) {
                                 WatchFaceCard(
                                     title = "Clean",
-                                    subtitle = "Minimal and elegant faces.",
-                                    modifier = Modifier.weight(1f).fillMaxHeight()
+                                    subtitle = "Only the most important.",
+                                    modifier = Modifier.weight(1f).fillMaxHeight(),
+                                    image = painterResource(R.drawable.clean_preview)
                                 )
                                 WatchFaceCard(
                                     title = "Data Rich",
-                                    subtitle = "Information-packed designs.",
-                                    modifier = Modifier.weight(1f).fillMaxHeight()
+                                    subtitle = "Functionality and convenient extensions.",
+                                    modifier = Modifier.weight(1f).fillMaxHeight(),
+                                    image = painterResource(R.drawable.datarich_preview)
                                 )
                             }
                         }

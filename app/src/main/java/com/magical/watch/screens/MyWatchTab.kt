@@ -57,15 +57,15 @@ class MyWatchTab : Screen {
             ) {
                 item("Image") {
                     Image(
-                        painter = painterResource(R.drawable.watches),
+                        painter = painterResource(R.drawable.set_up_apple_watch_normal),
                         contentDescription = "Landing Image",
                         modifier = Modifier
-                            .height(239.dp)
+                            .height(268.dp)
                             .fillMaxWidth()
                     )
                 }
                 item("Title & Description") {
-                    Spacer(Modifier.height(88.dp))
+                    Spacer(Modifier.height(59.dp))
                     CupertinoText(
                         text = "Good evening!",
                         fontFamily = medium,
